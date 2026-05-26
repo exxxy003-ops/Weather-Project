@@ -49,7 +49,7 @@ function UVCard({ uv = 0, accent }) {
   const { label, color } = uvLabel(uv)
 
   return (
-    <div className="n-card p-4 flex flex-col gap-1">
+    <div className="n-card p-4 flex flex-col gap-1 h-full">
       <p className="text-white/35 text-[10px] font-light tracking-widest uppercase">UV Index</p>
       <div className="flex items-center gap-3">
         <svg viewBox="0 0 120 68" className="w-28 flex-shrink-0">
@@ -82,7 +82,7 @@ function WindStatusCard({ wind_spd = 0, wind_dir = 0, accent }) {
   const bars = [0.3,0.5,0.4,0.7,0.6,0.5,0.8,0.6,0.7,0.9,0.7,0.8,0.6,0.55,0.7,0.65,0.4,0.5,0.75,1]
 
   return (
-    <div className="n-card p-4 flex flex-col gap-2">
+    <div className="n-card p-4 flex flex-col gap-2 h-full">
       <p className="text-white/35 text-[10px] font-light tracking-widest uppercase">Wind Status</p>
       <div className="flex items-end justify-between">
         <div>
@@ -137,7 +137,7 @@ function SunriseCard({ sunrise: sunriseUTC = '00:30', sunset: sunsetUTC = '13:30
   const [sunX, sunY] = arcPoint(sunAngle, cx, cy, r)
 
   return (
-    <div className="n-card p-4 flex flex-col gap-1">
+    <div className="n-card p-4 flex flex-col gap-1 h-full">
       <p className="text-white/35 text-[10px] font-light tracking-widest uppercase">Sunrise & Sunset</p>
       <svg viewBox="0 0 160 65" className="w-full">
         <path d={`M ${sx} ${sy} A ${r} ${r} 0 0 1 ${ex} ${ey}`}
@@ -180,7 +180,7 @@ function HumidityCard({ rh = 0, accent }) {
   const pct = Math.min(rh, 100)
 
   return (
-    <div className="n-card p-4 flex flex-col gap-2">
+    <div className="n-card p-4 flex flex-col gap-2 h-full">
       <p className="text-white/35 text-[10px] font-light tracking-widest uppercase">Humidity</p>
       <div className="flex items-center justify-between gap-3">
         <div>
@@ -219,7 +219,7 @@ function VisibilityCard({ vis = 0, accent }) {
   const pct = Math.min((vis / max) * 100, 100)
 
   return (
-    <div className="n-card p-4 flex flex-col gap-2">
+    <div className="n-card p-4 flex flex-col gap-2 h-full">
       <p className="text-white/35 text-[10px] font-light tracking-widest uppercase">Visibility</p>
       <div>
         <span className="text-3xl font-thin text-white font-mono">{vis?.toFixed(1) ?? '—'}</span>
@@ -252,7 +252,7 @@ function AirQualityCard({ aqi, accent }) {
   const { label, color } = aqiLabel(aqi ?? 0)
 
   return (
-    <div className="n-card p-4 flex flex-col gap-2">
+    <div className="n-card p-4 flex flex-col gap-2 h-full">
       <p className="text-white/35 text-[10px] font-light tracking-widest uppercase">Air Quality</p>
       <div className="flex items-center justify-between">
         <div>

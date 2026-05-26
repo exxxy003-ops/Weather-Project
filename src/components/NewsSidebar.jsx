@@ -10,10 +10,12 @@ function needsBadge(title) {
 export default function NewsSidebar({ city, onHeadlines }) {
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     setLoading(true)
     setArticles([])
+    setError(null)
     const key = import.meta.env.VITE_GNEWS_KEY
     axios
       .get(`https://gnews.io/api/v4/search?q=weather+${encodeURIComponent(city)}&lang=en&max=5&apikey=${key}`)
@@ -22,7 +24,10 @@ export default function NewsSidebar({ city, onHeadlines }) {
         setArticles(arts)
         if (onHeadlines) onHeadlines(arts.map(a => a.title))
       })
-      .catch(() => {})
+      .catch(err => {
+        const msg = err?.response?.data?.errors?.[0] ?? err?.message ?? 'Failed to load news'
+        setError(msg)
+      })
       .finally(() => setLoading(false))
   }, [city, onHeadlines])
 
@@ -34,6 +39,8 @@ export default function NewsSidebar({ city, onHeadlines }) {
 
       {loading ? (
         <p className="text-white/15 text-xs font-mono">FETCHING NEWS…</p>
+      ) : error ? (
+        <p className="text-red-400/60 text-xs font-mono tracking-wide">{error}</p>
       ) : (
         <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-none">
           {articles.map((article, i) => (
